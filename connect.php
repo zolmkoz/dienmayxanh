@@ -1,5 +1,5 @@
 <?php
-	$Connect = mysqli_connect("sql101.epizy.com","epiz_30115456","pXoBnojlv713nVc","epiz_30115456_zolmkoz") or die("Lỗi".mysqli_error($Connect));
+	$Connect = mysqli_connect("185.27.134.10","epiz_30115456","pXoBnojlv713nVc","epiz_30115456_zolmkoz") or die("Lỗi".mysqli_error($Connect));
 	
 	mysqli_query($Connect,'SET NAMES "utf8"');
 	//mysqli_close($Connect);*/
