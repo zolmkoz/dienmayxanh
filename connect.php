@@ -7,7 +7,7 @@
     //$Connect = pg_connect("host=localhost port=5432 dbname=postgres");
 	//$Connect = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=123456");
 	
-    if (!$Connect) {
-        die("Connection failed");
-    }
+    //if (!$Connect) {
+       // die("Connection failed");
+    //}
 ?>
