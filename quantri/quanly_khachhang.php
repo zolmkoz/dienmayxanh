@@ -28,8 +28,8 @@
              <tbody>
               <?php
 
-              $result = mysqli_query($Connect, "SELECT * FROM khachhang");
-              while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+              $result = pg_query($Connect, "SELECT * FROM khachhang");
+              while($row=pg_fetch_array($result, MYSQLI_ASSOC)){
                ?>
                <tr>
                  <td ><?php echo $row["KH_User"] ?></td>

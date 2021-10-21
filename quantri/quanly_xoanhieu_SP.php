@@ -36,7 +36,7 @@ if(!empty($_POST['checkbox']))
 	for($i = 0; $i < count($_POST['checkbox']); $i++)
 	{
 		$MaSP = $_POST['checkbox'][$i];
-		mysqli_query($Connect,"DELETE FROM sanpham where SP_Ma = '$MaSP'");
+		pg_query($Connect,"DELETE FROM sanpham where SP_Ma = '$MaSP'");
 	}
 }
 else 

@@ -14,8 +14,8 @@ if(isset($_POST['btnExport']))
 	$Sheet -> setCellValue('D1','Trạng Thái Thanh Toán');
 	$Sheet -> setCellValue('E1','Hình Thức Thanh Toán');
 	$Sheet -> setCellValue('F1','Tài Khoản Mua Hàng');
-	$Result = mysqli_query($Connect,"SELECT * FROM donhang");
-	while ($Row = mysqli_fetch_array($Result))
+	$Result = pg_query($Connect,"SELECT * FROM donhang");
+	while ($Row = pg_fetch_array($Result))
 	{
 		$TTTT = "";
 		if($Row['DH_TrangThaiThanhToan'] == 0)

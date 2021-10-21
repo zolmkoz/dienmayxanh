@@ -1,8 +1,8 @@
 <?php
 if(isset($_GET['ma'])){
 	$ma = $_GET['ma'];
-	$a = mysqli_query($Connect,"select KH_TrangThai, KH_QuanTri from khachhang where KH_User = '$ma'");
-	$row = mysqli_fetch_row($a);
+	$a = pg_query($Connect,"select KH_TrangThai, KH_QuanTri from khachhang where KH_User = '$ma'");
+	$row = pg_fetch_row($a);
 	$TrangThai = $row[0];
 	$QuanTri = $row[1];	
 	?>
@@ -11,7 +11,7 @@ if(isset($_GET['ma'])){
 		$TrangThai  = $_POST['txtTrangThai'];
 		$QuanTri = $_POST['txtQuanTri'];
 		$b = "UPDATE khachhang SET KH_TrangThai = '$TrangThai',KH_QuanTri = '$QuanTri' where KH_User = '$ma'";
-		mysqli_query($Connect,$b);
+		pg_query($Connect,$b);
 		echo "<meta http-equiv='refresh' content='0; url=?ID=khachhang' />";
 	}
 	?>

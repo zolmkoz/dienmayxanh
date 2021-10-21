@@ -37,7 +37,7 @@ if(!empty($_POST['checkbox']))
 	for($i = 0; $i < count($_POST['checkbox']); $i++)
 	{
 		$Ma = $_POST['checkbox'][$i];
-		mysqli_query($Connect,"DELETE FROM nhasanxuat where NSX_Ma = '$Ma'");
+		pg_query($Connect,"DELETE FROM nhasanxuat where NSX_Ma = '$Ma'");
 	}
 }
 else 

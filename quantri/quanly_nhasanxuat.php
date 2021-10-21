@@ -82,8 +82,8 @@ function(isConfirm){
 
  <tbody>
   <?php
-  $sql = mysqli_query($Connect,"Select * from nhasanxuat");
-  while($row = mysqli_fetch_array($sql))
+  $sql = pg_query($Connect,"Select * from nhasanxuat");
+  while($row = pg_fetch_array($sql))
   {
    ?>
    <tr>
@@ -107,7 +107,7 @@ function(isConfirm){
 <?php
 if(isset($_GET['ma'])){
   $ma  =$_GET['ma'];
-  mysqli_query($Connect,"DELETE from nhasanxuat where NSX_Ma = '$ma'");
+  pg_query($Connect,"DELETE from nhasanxuat where NSX_Ma = '$ma'");
   echo "<meta http-equiv='refresh' content='0; url=?ID=nhasanxuat'/>";
 }
 ?>

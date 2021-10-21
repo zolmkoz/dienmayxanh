@@ -19,8 +19,8 @@
       </thead>
       <tbody>
         <?php
-        $sql = mysqli_query($Connect,"Select * from donhang");
-        while($row = mysqli_fetch_array($sql))
+        $sql = pg_query($Connect,"Select * from donhang");
+        while($row = pg_fetch_array($sql))
         {
          ?>
          <tr>

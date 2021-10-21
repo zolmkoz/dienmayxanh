@@ -14,9 +14,9 @@ if(isset($_POST['btnThemMoi'])){
 	}
 	else {
 		$sql = "select * from nhasanxuat where NSX_Ma = '$MaNSX' ORDER BY NSX_Ma";
-		$result = mysqli_query($Connect,$sql);
-		if(mysqli_num_rows($result)==0){
-			mysqli_query($Connect,"INSERT INTO nhasanxuat(NSX_Ma,NSX_Ten) VALUES('$MaNSX','$TenNSX')");
+		$result = pg_query($Connect,$sql);
+		if(pg_num_rows($result)==0){
+			pg_query($Connect,"INSERT INTO nhasanxuat(NSX_Ma,NSX_Ten) VALUES('$MaNSX','$TenNSX')");
 			echo "<script>setTimeout(function(){SPThanhCong('nhasanxuat')},100);</script>";
 		}
 	}

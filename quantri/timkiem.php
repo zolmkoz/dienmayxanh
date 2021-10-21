@@ -19,18 +19,18 @@
 						{
 							$LoaiSP = $_POST['slLoaiSP'];
 							$NoiDung = $_POST['txtSearch'];
-							$SanPham = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE c.LSP_Ma = '$LoaiSP' AND SP_Ten LIKE '%$NoiDung%'");
+							$SanPham = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE c.LSP_Ma = '$LoaiSP' AND SP_Ten LIKE '%$NoiDung%'");
 							if($LoaiSP == 0)
 							{
 								echo "<h3>Vui Lòng Chọn Loại Sản Phẩm Tương Ứng!</h3>";
 							}
-							else if(mysqli_num_rows($SanPham) == 0)
+							else if(pg_num_rows($SanPham) == 0)
 							{
 								echo "<h3>Không Tìm Thấy Sản Phẩm Nào...</h3>";
 							}
 							else
 							{
-								while($RowSanPham = mysqli_fetch_array($SanPham))
+								while($RowSanPham = pg_fetch_array($SanPham))
 								{
 									?>
 									<div class="col-sm-4">

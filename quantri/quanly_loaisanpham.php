@@ -82,8 +82,8 @@ function(isConfirm){
 
  <tbody>
   <?php
-  $sql = mysqli_query($Connect,"Select * from loaisanpham");
-  while($row = mysqli_fetch_array($sql))
+  $sql = pg_query($Connect,"Select * from loaisanpham");
+  while($row = pg_fetch_array($sql))
   {
    ?>
    <tr>
@@ -116,7 +116,7 @@ function(isConfirm){
 <?php
 if(isset($_GET['ma'])){
   $ma  =$_GET['ma'];
-  mysqli_query($Connect,"DELETE from loaisanpham where LSP_Ma = '$ma'");
+  pg_query($Connect,"DELETE from loaisanpham where LSP_Ma = '$ma'");
   echo "<meta http-equiv='refresh' content='0; url=?ID=loaisanpham'/>";
 }
 ?>
@@ -130,7 +130,7 @@ if(isset($_GET['ma'])){
 					// 	for($i = 0; $i < count($_POST['checkbox']); $i++)
 					// 	{
 					// 		$MaLoai = $_POST['checkbox'][$i];
-					// 		mysqli_query($Connect,"DELETE from loaisanpham where LSP_Ma = '$MaLoai'");
+					// 		pg_query($Connect,"DELETE from loaisanpham where LSP_Ma = '$MaLoai'");
 					// 		echo "<meta http-equiv='refresh' content='0; url=?ID=loaisanpham'/>";
 					// 	}
 					// }

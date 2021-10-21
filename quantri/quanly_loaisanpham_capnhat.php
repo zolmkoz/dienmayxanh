@@ -1,8 +1,8 @@
 <?php
 if(isset($_GET['ma'])){
 	$ma = $_GET['ma'];
-	$a = mysqli_query($Connect,"select LSP_Ten, LSP_MoTa from loaisanpham where LSP_Ma = '$ma'");
-	$row = mysqli_fetch_row($a);
+	$a = pg_query($Connect,"select LSP_Ten, LSP_MoTa from loaisanpham where LSP_Ma = '$ma'");
+	$row = pg_fetch_row($a);
 	$ten = $row[0];
 	$mota = $row[1];	
 	?>
@@ -12,7 +12,7 @@ if(isset($_GET['ma'])){
 		$MoTa = $_POST['txtMoTa'];
 		echo "<script>setTimeout(function(){CapNhatSanPham('loaisanpham')},100);</script>";
 		$b = "UPDATE loaisanpham SET LSP_Ten = '$Ten',LSP_MoTa = '$MoTa' where LSP_Ma = '$ma'";
-		mysqli_query($Connect,$b);
+		pg_query($Connect,$b);
 	}
 	?>
 	<!-- Bootstrap --> 

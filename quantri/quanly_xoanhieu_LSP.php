@@ -37,7 +37,7 @@ if(!empty($_POST['checkbox']))
 	for($i = 0; $i < count($_POST['checkbox']); $i++)
 	{
 		$MaLSP = $_POST['checkbox'][$i];
-		mysqli_query($Connect,"DELETE FROM loaisanpham where LSP_Ma = '$MaLSP'");
+		pg_query($Connect,"DELETE FROM loaisanpham where LSP_Ma = '$MaLSP'");
 	}
 }
 else {

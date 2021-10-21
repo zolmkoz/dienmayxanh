@@ -1,18 +1,18 @@
 ﻿	   <?php
 	   function bindLSPList($Connect){
-	   	$ListLSP = mysqli_query($Connect,"SELECT LSP_Ma, LSP_Ten from loaisanpham");
+	   	$ListLSP = pg_query($Connect,"SELECT LSP_Ma, LSP_Ten from loaisanpham");
 	   	echo "<select name='slLoaiSanPham' class='form-control'>";
 	   	echo "<option value='0'>Chọn Loại Sản Phẩm</option>";
-	   	while($row = mysqli_fetch_array($ListLSP)){
+	   	while($row = pg_fetch_array($ListLSP)){
 	   		echo "<option value='".$row['LSP_Ma']."'>".$row['LSP_Ten']."</option>";
 	   	}
 	   	echo "</select>";
 	   }
 	   function bindNSXList($Connect){
-	   	$ListNSX = mysqli_query($Connect,"SELECT NSX_Ma, NSX_Ten from nhasanxuat");
+	   	$ListNSX = pg_query($Connect,"SELECT NSX_Ma, NSX_Ten from nhasanxuat");
 	   	echo "<select name='slNhaSanXuat' class='form-control'>";
 	   	echo "<option value='0'>Chọn Nhà Sản Xuất</option>";
-	   	while($row = mysqli_fetch_array($ListNSX)){
+	   	while($row = pg_fetch_array($ListNSX)){
 	   		echo "<option value='".$row['NSX_Ma']."'>".$row['NSX_Ten']."</option>";
 	   	}
 	   	echo "</select>";
@@ -40,13 +40,13 @@
 	   	}else if($MoTaDai==""){
 	   		echo "Vui Lòng Nhập Mô Tả Chỉ Tiết";
 	   	}else if($TenSP != "" && $Gia != "" && $SL != "" && $LoaiSP != "" && $NhaSX != "" && $MoTaNgan != "" && $MoTaDai !=""){
-	   		$sql = mysqli_query($Connect,"SELECT SP_Ten from sanpham where SP_Ten='$TenSP'");
-	   		if(mysqli_num_rows($sql)==0){
+	   		$sql = pg_query($Connect,"SELECT SP_Ten from sanpham where SP_Ten='$TenSP'");
+	   		if(pg_num_rows($sql)==0){
 	   			$Today=date('Y-m-d');
-	   			mysqli_query($Connect,"INSERT INTO sanpham(SP_Ten, SP_GiaHienTai, SP_SoLuong, SP_MoTa, SP_MoTa_ChiTiet, LSP_Ma,NSX_Ma,SP_NgayCapNhat) VALUES('$TenSP','$Gia','$SL','$MoTaNgan','$MoTaDai','$LoaiSP','$NhaSX','$Today')") or die(mysqli_error($Connect));
+	   			pg_query($Connect,"INSERT INTO sanpham(SP_Ten, SP_GiaHienTai, SP_SoLuong, SP_MoTa, SP_MoTa_ChiTiet, LSP_Ma,NSX_Ma,SP_NgayCapNhat) VALUES('$TenSP','$Gia','$SL','$MoTaNgan','$MoTaDai','$LoaiSP','$NhaSX','$Today')") or die(mysqli_error($Connect));
 	   			echo "<script>setTimeout(function(){SPThanhCong('sanpham')},100);</script>";
 	   		}
-	   		else if(mysqli_num_rows($sql)>0)
+	   		else if(pg_num_rows($sql)>0)
 	   		{
 	   			echo "<script>setTimeout(function(){SPCoRoi()},100);</script>";
 	   		}

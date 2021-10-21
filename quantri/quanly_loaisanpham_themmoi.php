@@ -11,9 +11,9 @@ if(isset($_POST['btnThemMoi'])){
 	}
 	else {
 		$sql = "select * from loaisanpham where LSP_Ten = '$ten'";
-		$result = mysqli_query($Connect,$sql);
-		if(mysqli_num_rows($result)==0){
-			mysqli_query($Connect,"INSERT INTO loaisanpham(LSP_Ten,LSP_MoTa) VALUES('$ten','$mota')");
+		$result = pg_query($Connect,$sql);
+		if(pg_num_rows($result)==0){
+			pg_query($Connect,"INSERT INTO loaisanpham(LSP_Ten,LSP_MoTa) VALUES('$ten','$mota')");
 			echo "<script>setTimeout(function(){LSPThanhCong()},100);</script>";
 		}
 	}

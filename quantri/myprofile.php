@@ -33,8 +33,8 @@
 					if(isset($_GET['ma']))
 					{
 						$ID = $_GET['ma'];
-						$Profile = mysqli_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$ID'");
-						$rowProfile = mysqli_fetch_array($Profile);
+						$Profile = pg_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$ID'");
+						$rowProfile = pg_fetch_array($Profile);
 					}
 					?>
 					<tr>

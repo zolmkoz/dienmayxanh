@@ -1,9 +1,9 @@
 <?php
 function bindLSPList($Connect,$Value){
-	$ListLSP = mysqli_query($Connect,"SELECT LSP_Ma, LSP_Ten from loaisanpham");
+	$ListLSP = pg_query($Connect,"SELECT LSP_Ma, LSP_Ten from loaisanpham");
 	echo "<select name='slLoaiSanPham' class='form-control'>";
 	echo "<option value='0'>Chọn Loại Sản Phẩm</option>";
-	while($row = mysqli_fetch_array($ListLSP)){
+	while($row = pg_fetch_array($ListLSP)){
 		if($row['LSP_Ma']==$Value){
 			echo "<option value='".$row['LSP_Ma']."' selected>".$row['LSP_Ten']."</option>";
 		}else echo "<option value='".$row['LSP_Ma']."'>".$row['LSP_Ten']."</option>";
@@ -11,10 +11,10 @@ function bindLSPList($Connect,$Value){
 	echo "</select>";
 }
 function bindNSXList($Connect,$Value){
-	$ListNSX = mysqli_query($Connect,"SELECT NSX_Ma, NSX_Ten from nhasanxuat");
+	$ListNSX = pg_query($Connect,"SELECT NSX_Ma, NSX_Ten from nhasanxuat");
 	echo "<select name='slNhaSanXuat' class='form-control'>";
 	echo "<option value='0'>Chọn Nhà Sản Xuất</option>";
-	while($row = mysqli_fetch_array($ListNSX)){
+	while($row = pg_fetch_array($ListNSX)){
 		if($row['NSX_Ma']==$Value){
 			echo "<option value='".$row['NSX_Ma']."' selected>".$row['NSX_Ten']."</option>";
 		}else echo "<option value='".$row['NSX_Ma']."'>".$row['NSX_Ten']."</option>";
@@ -24,8 +24,8 @@ function bindNSXList($Connect,$Value){
 if(isset($_GET['ma'])){
 	$Ma = $_GET['ma'];
 	$sql = "select SP_Ten, LSP_Ma, NSX_Ma, SP_GiaHienTai, SP_MoTa, SP_MoTa_ChiTiet, SP_SoLuong from sanpham where SP_Ma='$Ma'";
-	$result = mysqli_query($Connect,$sql);
-	$row2 = mysqli_fetch_row($result);
+	$result = pg_query($Connect,$sql);
+	$row2 = pg_fetch_row($result);
 	$TenSP = $row2[0];
 	$LoaiSP = $row2[1];
 	$NhaSX = $row2[2];
@@ -59,7 +59,7 @@ if(isset($_GET['ma'])){
 			echo "Vui Lòng Nhập Mô Tả Chỉ Tiết";
 		}else {
 			echo "<script>setTimeout(function(){CapNhatSanPham('sanpham')},100);</script>";
-			mysqli_query($Connect,"UPDATE sanpham SET SP_Ten = '$TenSP', LSP_Ma = '$LoaiSP', NSX_Ma = '$NhaSX', SP_GiaHienTai = '$Gia', SP_MoTa = '$MoTaNgan', SP_MoTa_ChiTiet = '$MoTaDai', SP_SoLuong = '$SL' where SP_Ma = '$Ma'") or die(mysqli_error($Connect));
+			pg_query($Connect,"UPDATE sanpham SET SP_Ten = '$TenSP', LSP_Ma = '$LoaiSP', NSX_Ma = '$NhaSX', SP_GiaHienTai = '$Gia', SP_MoTa = '$MoTaNgan', SP_MoTa_ChiTiet = '$MoTaDai', SP_SoLuong = '$SL' where SP_Ma = '$Ma'") or die(mysqli_error($Connect));
 			
 		}
 	}

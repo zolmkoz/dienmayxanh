@@ -21,10 +21,10 @@
         if(isset($_GET['MaDonHang']))
         {
           $MaDonHang = $_GET['MaDonHang'];
-          $sql = mysqli_query($Connect,"SELECT  * FROM sp_dondathang a JOIN sanpham b ON a.SP_Ma = b.SP_Ma WHERE DH_Ma = $MaDonHang ");
-          while($row = mysqli_fetch_array($sql))
+          $sql = pg_query($Connect,"SELECT  * FROM sp_dondathang a JOIN sanpham b ON a.SP_Ma = b.SP_Ma WHERE DH_Ma = $MaDonHang ");
+          while($row = pg_fetch_array($sql))
           {
-            //$Count = mysqli_query($Connect,"SELECT count(SP_Ma) as SC FROM sp_dondathang WHERE DH_Ma = $DH_Ma");
+            //$Count = pg_query($Connect,"SELECT count(SP_Ma) as SC FROM sp_dondathang WHERE DH_Ma = $DH_Ma");
             ?>
             <tr>
               <td align="center" style="vertical-align: middle;"><?php echo $row['DH_Ma']?></td>

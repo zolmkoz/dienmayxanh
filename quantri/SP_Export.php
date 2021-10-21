@@ -20,8 +20,8 @@ if(isset($_POST['btnExport']))
      $Sheet -> setCellValue('I1','Loại Sản Phẩm');
      $Sheet -> setCellValue('J1','Nhà Sản Xuất');
      $Sheet -> setCellValue('K1','Mã Khuyến Mãi');
-     $Result = mysqli_query($Connect,"SELECT * FROM sanpham a JOIN loaisanpham b ON a.LSP_Ma = b.LSP_Ma JOIN nhasanxuat c ON a.NSX_Ma = c.NSX_Ma");
-     while ($Row = mysqli_fetch_array($Result))
+     $Result = pg_query($Connect,"SELECT * FROM sanpham a JOIN loaisanpham b ON a.LSP_Ma = b.LSP_Ma JOIN nhasanxuat c ON a.NSX_Ma = c.NSX_Ma");
+     while ($Row = pg_fetch_array($Result))
      {                      
      	$Sheet -> setCellValue('A'.$SoDong,$Row['SP_Ma']);
      	$Sheet -> setCellValue('B'.$SoDong,$Row['SP_Ten']);

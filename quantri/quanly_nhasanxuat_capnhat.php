@@ -1,8 +1,8 @@
 <?php
 	if(isset($_GET['ma'])){
 		$ma = $_GET['ma'];
-		$a = mysqli_query($Connect,"select NSX_Ma, NSX_Ten from nhasanxuat where NSX_Ma = '$ma'");
-		$row = mysqli_fetch_row($a);
+		$a = pg_query($Connect,"select NSX_Ma, NSX_Ten from nhasanxuat where NSX_Ma = '$ma'");
+		$row = pg_fetch_row($a);
 		$MaNSX = $row[0];
 		$TenNSX = $row[1];	
 ?>
@@ -12,7 +12,7 @@
 			$TenNSX = $_POST['txtTenNSX'];
 			echo "<script>setTimeout(function(){CapNhatSanPham('nhasanxuat')},100);</script>";
 			$b = "UPDATE nhasanxuat SET NSX_Ma = '$MaNSX',NSX_Ten = '$TenNSX' where NSX_Ma = '$ma'";
-			mysqli_query($Connect,$b);
+			pg_query($Connect,$b);
 			
 			}
 ?>

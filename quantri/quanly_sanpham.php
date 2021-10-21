@@ -67,7 +67,7 @@ function(isConfirm){
 if(isset($_GET['ma']))
 {
   $Ma = $_GET['ma'];
-  mysqli_query($Connect,"DELETE from sanpham where SP_Ma = '$Ma'");
+  pg_query($Connect,"DELETE from sanpham where SP_Ma = '$Ma'");
   echo "<meta http-equiv='refresh' content='0, URL=?ID=sanpham'/>";
 }
 ?>
@@ -99,8 +99,8 @@ if(isset($_GET['ma']))
       <tbody>
         <?php
 
-        $result = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma LIMIT 0,1) as HinhSanPham, LSP_Ten, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma ORDER BY SP_Ma");
-        while($row=mysqli_fetch_array($result)){
+        $result = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma LIMIT 0,1) as HinhSanPham, LSP_Ten, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma ORDER BY SP_Ma");
+        while($row=pg_fetch_array($result)){
           ?>
           <tr>
             <td style="vertical-align: middle;"><input type="checkbox" name="checkbox[]" value="<?php echo $row['SP_Ma']; ?>"/></td>

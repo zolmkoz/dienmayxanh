@@ -26,7 +26,7 @@ if(isset($_POST['btnImport']))
 			$MaLSP = $sheetData[$Row]['H'];
 			$MaNSX = $sheetData[$Row]['I'];
 			$MaKM = $sheetData[$Row]['J'];
-			mysqli_query($Connect,"INSERT INTO sanpham (SP_Ten, SP_GiaHienTai, SP_GiaCu, SP_MoTa, SP_MoTa_ChiTiet, SP_NgayCapNhat, SP_SoLuong, LSP_Ma, NSX_Ma, KM_Ma) VALUES('$Name', $GiaHienTai, $GiaCu, '$MoTa', '$MoTaChiTiet', '$NgayUpdate', $SoLuong, $MaLSP, $MaNSX, $MaKM)");
+			pg_query($Connect,"INSERT INTO sanpham (SP_Ten, SP_GiaHienTai, SP_GiaCu, SP_MoTa, SP_MoTa_ChiTiet, SP_NgayCapNhat, SP_SoLuong, LSP_Ma, NSX_Ma, KM_Ma) VALUES('$Name', $GiaHienTai, $GiaCu, '$MoTa', '$MoTaChiTiet', '$NgayUpdate', $SoLuong, $MaLSP, $MaNSX, $MaKM)");
 		}
 		echo "<script language='javascript'>setTimeout(function(){SPThanhCong('sanpham')});</script>";
 	}

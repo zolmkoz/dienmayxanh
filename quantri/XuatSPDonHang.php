@@ -14,8 +14,8 @@ if(isset($_POST['btnExport']) && isset($_GET['MaDonHang']))
 	$Sheet -> setCellValue('C1','Tên Sản Phẩm');
 	$Sheet -> setCellValue('D1','Số Lượng');
 	$Sheet -> setCellValue('E1','Giá');
-	$Result = mysqli_query($Connect,"SELECT * FROM sp_dondathang a JOIN sanpham b ON a.SP_Ma = b.SP_Ma WHERE DH_Ma = $MaDonHang");
-	while ($Row = mysqli_fetch_array($Result))
+	$Result = pg_query($Connect,"SELECT * FROM sp_dondathang a JOIN sanpham b ON a.SP_Ma = b.SP_Ma WHERE DH_Ma = $MaDonHang");
+	while ($Row = pg_fetch_array($Result))
 	{
 		$Sheet -> setCellValue('A'.$SoDong,$Row['DH_Ma']);
 		$Sheet -> setCellValue('B'.$SoDong,$Row['SP_Ma']);
