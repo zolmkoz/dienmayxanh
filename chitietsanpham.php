@@ -7,8 +7,8 @@ if(isset($_GET['IDSP']))
 	{
 		if(is_numeric($_POST['SoLuong']))
 		{
-			$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
-			$RowSLHang = mysqli_fetch_row($SLHang);
+			$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
+			$RowSLHang = pg_fetch_row($SLHang);
 			if($RowSLHang[0] >= $_POST['SoLuong'])
 			{
 				$DaCo = false;
@@ -21,8 +21,8 @@ if(isset($_GET['IDSP']))
 				}
 				if(!$DaCo)
 				{
-					$SPChiTiet = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
-					$RowSPChiTiet = mysqli_fetch_array($SPChiTiet);
+					$SPChiTiet = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
+					$RowSPChiTiet = pg_fetch_array($SPChiTiet);
 					$TenSP = $RowSPChiTiet['SP_Ten'];
 					$GiaSP = $RowSPChiTiet['SP_GiaHienTai'];
 					$Anh_SP = $RowSPChiTiet['AvatarSP'];
@@ -58,8 +58,8 @@ if(isset($_GET['IDSP']))
 				<div class="col-md-5 col-md-push-2">
 					<div id="product-main-img">
 						<?php 
-						$AnhMain = mysqli_query($Connect,"SELECT HSP_TenTapTin FROM hinhsanpham WHERE SP_Ma = '$IDSP'");
-						while($RowAnhMain = mysqli_fetch_array($AnhMain))
+						$AnhMain = pg_query($Connect,"SELECT HSP_TenTapTin FROM hinhsanpham WHERE SP_Ma = '$IDSP'");
+						while($RowAnhMain = pg_fetch_array($AnhMain))
 						{
 							?>
 							<div class="product-preview">
@@ -75,8 +75,8 @@ if(isset($_GET['IDSP']))
 				<div class="col-md-2  col-md-pull-5">
 					<div id="product-imgs">
 						<?php 
-						$AnhMain = mysqli_query($Connect,"SELECT HSP_TenTapTin FROM hinhsanpham WHERE SP_Ma = '$IDSP'");
-						while($RowAnhMain = mysqli_fetch_array($AnhMain))
+						$AnhMain = pg_query($Connect,"SELECT HSP_TenTapTin FROM hinhsanpham WHERE SP_Ma = '$IDSP'");
+						while($RowAnhMain = pg_fetch_array($AnhMain))
 						{
 							?>
 							<div class="product-preview">
@@ -92,8 +92,8 @@ if(isset($_GET['IDSP']))
 				<!-- Product details -->
 				<div class="col-md-5">
 					<?php 
-					$SPChiTiet = mysqli_query($Connect,"SELECT SP_Ma, LSP_Ten, a.LSP_Ma, NSX_Ten, SP_Ten, SP_GiaHienTai, SP_GiaCu, SP_MoTa, SP_MoTa_ChiTiet, SP_SoLuong FROM sanpham a JOIN loaisanpham b ON a.LSP_Ma = b.LSP_Ma JOIN nhasanxuat c ON a.NSX_Ma = c.NSX_Ma WHERE SP_Ma = '$IDSP'");
-					while($RowSPChiTiet = mysqli_fetch_array($SPChiTiet))
+					$SPChiTiet = pg_query($Connect,"SELECT SP_Ma, LSP_Ten, a.LSP_Ma, NSX_Ten, SP_Ten, SP_GiaHienTai, SP_GiaCu, SP_MoTa, SP_MoTa_ChiTiet, SP_SoLuong FROM sanpham a JOIN loaisanpham b ON a.LSP_Ma = b.LSP_Ma JOIN nhasanxuat c ON a.NSX_Ma = c.NSX_Ma WHERE SP_Ma = '$IDSP'");
+					while($RowSPChiTiet = pg_fetch_array($SPChiTiet))
 					{
 						?>
 						<div class="product-details">

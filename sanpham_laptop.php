@@ -15,8 +15,8 @@
 					
 					<div class="row">
 						<?php 
-						$SanPham = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE c.LSP_Ma = 1");
-						while($RowSanPham = mysqli_fetch_array($SanPham))
+						$SanPham = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE c.LSP_Ma = 1");
+						while($RowSanPham = pg_fetch_array($SanPham))
 						{
 							?>
 							<div class="col-sm-4">

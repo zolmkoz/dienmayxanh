@@ -18,8 +18,8 @@
 						if(isset($_GET['ma']))
 						{
 							$ID = $_GET['ma'];
-							$Profile = mysqli_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$ID'");
-							$rowProfile = mysqli_fetch_array($Profile);
+							$Profile = pg_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$ID'");
+							$rowProfile = pg_fetch_array($Profile);
 						}
 						?>
 						<tr>
@@ -79,7 +79,7 @@ if(isset($_POST['btnCapNhat']))
 	}
 	else
 	{
-		mysqli_query($Connect,"UPDATE khachhang SET KH_HoTen = '".$Hoten."', KH_DiaChi = '".$Diachi."', KH_DienThoai = '".$Phone."' WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
+		pg_query($Connect,"UPDATE khachhang SET KH_HoTen = '".$Hoten."', KH_DiaChi = '".$Diachi."', KH_DienThoai = '".$Phone."' WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
 		echo "<script>setTimeout(function(){showSwalUpdateInfo('".$_SESSION['TaiKhoan']."')});</script>";
 		//echo "<meta http-equiv = 'refresh' content = '0; URL=?ID=capnhatkhachhang&ma=".$_SESSION['TaiKhoan']."'>";
 	}

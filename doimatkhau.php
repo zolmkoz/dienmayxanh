@@ -53,11 +53,11 @@ if(isset($_POST['btnDoiMatKhau']))
 	}
 	else
 	{
-		$Pass = mysqli_query($Connect,"SELECT KH_User, KH_Password FROM khachhang WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
-		$RowPass = mysqli_fetch_array($Pass);
+		$Pass = pg_query($Connect,"SELECT KH_User, KH_Password FROM khachhang WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
+		$RowPass = pg_fetch_array($Pass);
 		if(md5($PassHienTai) == $RowPass['KH_Password'])
 		{	
-			mysqli_query($Connect,"UPDATE khachhang SET KH_Password = '".md5($PassMoi)."' WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
+			pg_query($Connect,"UPDATE khachhang SET KH_Password = '".md5($PassMoi)."' WHERE KH_User = '".$_SESSION['TaiKhoan']."'");
 			echo "<script>setTimeout(function(){showSwalChangedPass('".$_SESSION['TaiKhoan']."')},100);</script>";
 		}
 		else 

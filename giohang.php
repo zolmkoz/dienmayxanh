@@ -87,8 +87,8 @@ if(isset($_POST['btnThanhToan']))
 			if($_SESSION['GioHang'][$key]['SoLuong'] != $_POST['SP_'.$key])
 			{
 				$_SESSION['GioHang'][$key]['SoLuong'] = $_POST['SP_'.$key];
-				$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $key");
-				$RowSLHang = mysqli_fetch_array($SLHang);
+				$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $key");
+				$RowSLHang = pg_fetch_array($SLHang);
 				if($_POST['SP_'.$key] > $RowSLHang['SP_SoLuong'])
 				{
 					$_SESSION['GioHang'][$key]['SoLuong'] = 1;

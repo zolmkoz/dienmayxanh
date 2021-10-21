@@ -102,11 +102,11 @@ if(isset($_POST['btnDangKy'])){
 		}else 
 		{	
 			$Random = md5(rand());
-			$CheckTKTrung = mysqli_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$User' OR KH_Email = '$Email'");
-			if(mysqli_num_rows($CheckTKTrung) == 0)
+			$CheckTKTrung = pg_query($Connect,"SELECT * FROM khachhang WHERE KH_User = '$User' OR KH_Email = '$Email'");
+			if(pg_num_rows($CheckTKTrung) == 0)
 			{
 				$sql = "INSERT INTO khachhang(KH_User,KH_Password,KH_HoTen,KH_GioiTinh,KH_DiaChi,KH_DienThoai,KH_Email,KH_NgaySinh,KH_ThangSinh,KH_NamSinh,KH_MaKichHoat,KH_TrangThai,KH_QuanTri) VALUES('$User','".md5($Pass1)."','$HoTen','$GT','$DiaChi','$DienThoai','$Email','$Ngay','$Thang','$Nam','$Random',0,0)";
-				mysqli_query($Connect,$sql);
+				pg_query($Connect,$sql);
 				$NoiDungMail = "<p>Chúc mừng bạn đã đăng ký thành công</p>"."<p>Vui lòng nhấp vào liên kết sau để kích hoạt tài khoản <a href='http://localhost/Electro/index.php?ID=kichhoat&User=$User&MaKH=$Random'>http://localhost/Electro/kichhoat.php?User=$User&MaKH=$Random</a></p>";
 				SendMail("toanlh3@gmail.com","bdsmvn2015","Ban Quản Trị Website",array(array($Email,$HoTen)),array(array("toanlh3@gmail.com","Ban Quản Trị Web")),"Mail Kích Hoạt",$NoiDungMail);
 				echo "<script language='javascript'>setTimeout(function(){showSwalReg('$User')},100)</script>";

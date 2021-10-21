@@ -26,8 +26,8 @@
 							{
 								$SanPham .=" AND a.LSP_Ma = '$LoaiSP'";
 							}
-							$result = mysqli_query($Connect,$SanPham) or die(mysqli_error($Connect));
-							if(mysqli_num_rows($result)==0)
+							$result = pg_query($Connect,$SanPham) or die(mysqli_error($Connect));
+							if(pg_num_rows($result)==0)
 							{
 								?>
 								<script type="text/javascript">
@@ -49,7 +49,7 @@
 							}
 							else
 							{
-								while($RowSanPham = mysqli_fetch_array($result))
+								while($RowSanPham = pg_fetch_array($result))
 								{
 									?>
 									<div class="col-sm-4">

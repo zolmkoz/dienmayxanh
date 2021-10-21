@@ -147,9 +147,9 @@
 									<select name="slLoaiSP" id="slLoaiSP" class="input-select">
 										<option value='0'>Danh Mục Sản Phẩm</option>
 										<?php 
-										//$SelectLSP = mysqli_query($Connect,"SELECT * FROM loaisanpham");
+										//$SelectLSP = pg_query($Connect,"SELECT * FROM loaisanpham");
 										$SelectLSP = pg_query($Connect,'SELECT * FROM public."loaisanpham"');
-										//while ($RowSelectLSP = mysqli_fetch_array($SelectLSP))
+										//while ($RowSelectLSP = pg_fetch_array($SelectLSP))
 										while ($RowSelectLSP = pg_fetch_array($SelectLSP))	
 										{
 											?>
@@ -299,9 +299,9 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="index.php">Home</a></li>
 						<?php 
-						//$Menu = mysqli_query($Connect,"SELECT LSP_Ten,LSP_Ma FROM loaisanpham");
+						//$Menu = pg_query($Connect,"SELECT LSP_Ten,LSP_Ma FROM loaisanpham");
 						$Menu = pg_query($Connect,'SELECT * FROM public."loaisanpham"');
-						//while ($RowMenu = mysqli_fetch_array($Menu))
+						//while ($RowMenu = pg_fetch_array($Menu))
 						while ($RowMenu = pg_fetch_array($Menu))
 						{
 							
@@ -452,9 +452,9 @@
 								<h3 class="footer-title">PHÂN LOẠI</h3>
 								<ul class="footer-links">
 									<?php 
-									//$SelectLSP = mysqli_query($Connect,"SELECT * FROM loaisanpham");
+									//$SelectLSP = pg_query($Connect,"SELECT * FROM loaisanpham");
 									$SelectLSP = pg_query($Connect,"SELECT * FROM public.loaisanpham");
-									//while ($RowSelectLSP = mysqli_fetch_array($SelectLSP))
+									//while ($RowSelectLSP = pg_fetch_array($SelectLSP))
 									while ($RowSelectLSP = pg_fetch_array($SelectLSP))
 									{
 										?>

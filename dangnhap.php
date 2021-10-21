@@ -27,20 +27,20 @@ if(isset($_POST['btnLogin']))
 		//$Username = mysqli_real_escape_string($Connect, $Username);
 		//$Username = pg_real_escape_string($Connect, $Username);
 		$Password = md5($Password);
-		//$result = mysqli_query($Connect,"SELECT * FROM khachhang WHERE KH_User='$Username' AND KH_Password='$Password' AND KH_TrangThai = 1") or die(mysqli_error($Connect));
+		//$result = pg_query($Connect,"SELECT * FROM khachhang WHERE KH_User='$Username' AND KH_Password='$Password' AND KH_TrangThai = 1") or die(mysqli_error($Connect));
 		//$result = pg_query($Connect,"SELECT * FROM public.khachhang WHERE KH_User='$Username' AND KH_Password='$Password' AND KH_TrangThai = 1");
 		$result = pg_query($Connect,"SELECT * FROM public.khachhang WHERE KH_User='$Username' AND KH_Password='e6e061838856bf47e1de730719fb2609' AND KH_TrangThai = 1");
 		
-		//if(mysqli_num_rows($result)==1)
+		//if(pg_num_rows($result)==1)
 		if(pg_num_rows($result)==1)
 		{
 			echo "<script>setTimeout(function(){showSwalLogin('$Username');},100);</script>";
-			//$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			//$row = pg_fetch_array($result, MYSQLI_ASSOC);
 			$row = pg_fetch_array($result, PGSQL_ASSOC);
 			$_SESSION['TaiKhoan'] = $Username;
 			$_SESSION['QuanTri'] = $row['KH_QuanTri'];
 		}
-		//else if(mysqli_num_rows($result)==0)
+		//else if(pg_num_rows($result)==0)
 		else if(pg_num_rows($result)==0)
 		{
 			echo "<script>setTimeout(function(){showSwalLoginError();},100);</script>";

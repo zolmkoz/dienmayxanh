@@ -59,8 +59,8 @@
 		function YeuThich($IDSP,$Connect)
 		{
 			$IDSP = $_GET['IDSP'];
-			$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
-			$RowSLHang = mysqli_fetch_row($SLHang);
+			$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
+			$RowSLHang = pg_fetch_row($SLHang);
 			if($RowSLHang[0] >= 1)
 			{
 				$DaThich = false;
@@ -74,8 +74,8 @@
 				}
 				if(!$DaThich)
 				{
-					$SPChiTiet = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
-					$RowSPChiTiet = mysqli_fetch_array($SPChiTiet);
+					$SPChiTiet = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
+					$RowSPChiTiet = pg_fetch_row($SPChiTiet);
 			// $TenSP = $RowSPChiTiet['SP_Ten'];
 			// $GiaSP = $RowSPChiTiet['SP_GiaHienTai'];
 			// $SoLuongSP = $RowSPChiTiet['SP_SoLuong'];
@@ -163,8 +163,8 @@
 									<select name="slLoaiSP" class="input-select">
 										<option value='0'>Danh Mục Sản Phẩm</option>
 										<?php 
-										$SelectLSP = mysqli_query($Connect,"SELECT * FROM loaisanpham");
-										while ($RowSelectLSP = mysqli_fetch_array($SelectLSP))
+										$SelectLSP = pg_fetch_row($Connect,"SELECT * FROM loaisanpham");
+										while ($RowSelectLSP = pg_fetch_array($SelectLSP))
 										{
 											?>
 											<option value="<?php echo $RowSelectLSP['LSP_Ma']; ?>"><?php echo $RowSelectLSP['LSP_Ten']; ?></option>
@@ -300,8 +300,8 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="index.php">Home</a></li>
 						<?php 
-						$Menu = mysqli_query($Connect,"SELECT LSP_Ten,LSP_Ma FROM loaisanpham");
-						while ($RowMenu = mysqli_fetch_array($Menu))
+						$Menu = pg_query($Connect,"SELECT LSP_Ten,LSP_Ma FROM loaisanpham");
+						while ($RowMenu = pg_fetch_row($Menu))
 						{
 							?>
 							<li><a href="?ID=<?php if($RowMenu['LSP_Ma'] == 1){ echo 'Laptop'; } else if($RowMenu['LSP_Ma'] == 2){ echo 'Mayanh'; } else echo 'Dienthoai'; ?>"><?php echo $RowMenu['LSP_Ten']; ?></a></li>
@@ -454,8 +454,8 @@
 								<h3 class="footer-title">PHÂN LOẠI</h3>
 								<ul class="footer-links">
 									<?php 
-									$SelectLSP = mysqli_query($Connect,"SELECT * FROM loaisanpham");
-									while ($RowSelectLSP = mysqli_fetch_array($SelectLSP))
+									$SelectLSP = pg_query($Connect,"SELECT * FROM loaisanpham");
+									while ($RowSelectLSP = pg_fetch_row($SelectLSP))
 									{
 										?>
 										<li><a href="?ID=<?php if($RowSelectLSP['LSP_Ma'] == 1)

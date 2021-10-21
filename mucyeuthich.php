@@ -2,8 +2,8 @@
 function DatHang($IDSP,$Connect)
 {
 	$IDSP = $_GET['IDSP'];
-	$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
-	$RowSLHang = mysqli_fetch_row($SLHang);
+	$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
+	$RowSLHang = pg_fetch_row($SLHang);
 	if($RowSLHang[0] >= 1)
 	{
 		$DaCo = false;
@@ -17,8 +17,8 @@ function DatHang($IDSP,$Connect)
 		}
 		if(!$DaCo)
 		{
-			$SPChiTiet = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
-			$RowSPChiTiet = mysqli_fetch_array($SPChiTiet);
+			$SPChiTiet = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
+			$RowSPChiTiet = pg_fetch_array($SPChiTiet);
 			$TenSP = $RowSPChiTiet['SP_Ten'];
 			$GiaSP = $RowSPChiTiet['SP_GiaHienTai'];
 			$Anh_SP = $RowSPChiTiet['AvatarSP'];
@@ -136,8 +136,8 @@ if(isset($_GET['DatHang']) && isset($_GET['IDSP']))
 				if($_SESSION['GioHang'][$key]['SoLuong'] != $_POST['SP_'.$key])
 				{
 					$_SESSION['GioHang'][$key]['SoLuong'] = $_POST['SP_'.$key];
-					$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $key");
-					$RowSLHang = mysqli_fetch_array($SLHang);
+					$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $key");
+					$RowSLHang = pg_fetch_array($SLHang);
 					if($_POST['SP_'.$key] > $RowSLHang['SP_SoLuong'])
 					{
 						$_SESSION['GioHang'][$key]['SoLuong'] = 1;

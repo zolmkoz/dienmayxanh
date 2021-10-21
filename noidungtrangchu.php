@@ -2,8 +2,8 @@
 function DatHang($IDSP,$Connect)
 {
 	$IDSP = $_GET['IDSP'];
-	$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
-	$RowSLHang = mysqli_fetch_row($SLHang);
+	$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
+	$RowSLHang = pg_fetch_row($SLHang);
 	if($RowSLHang[0] >= 1)
 	{
 		$DaCo = false;
@@ -17,8 +17,8 @@ function DatHang($IDSP,$Connect)
 		}
 		if(!$DaCo)
 		{
-			$SPChiTiet = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
-			$RowSPChiTiet = mysqli_fetch_array($SPChiTiet);
+			$SPChiTiet = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
+			$RowSPChiTiet = pg_fetch_row($SPChiTiet);
 			$TenSP = $RowSPChiTiet['SP_Ten'];
 			$GiaSP = $RowSPChiTiet['SP_GiaHienTai'];
 			$Anh_SP = $RowSPChiTiet['AvatarSP'];
@@ -48,8 +48,8 @@ if(isset($_GET['DatHang']) && isset($_GET['IDSP']))
 function YeuThich($IDSP,$Connect)
 {
 	$IDSP = $_GET['IDSP'];
-	$SLHang = mysqli_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
-	$RowSLHang = mysqli_fetch_row($SLHang);
+	$SLHang = pg_query($Connect,"SELECT SP_SoLuong FROM sanpham WHERE SP_Ma = $IDSP");
+	$RowSLHang = pg_fetch_row($SLHang);
 	if($RowSLHang[0] >= 1)
 	{
 		$DaThich = false;
@@ -63,8 +63,8 @@ function YeuThich($IDSP,$Connect)
 		}
 		if(!$DaThich)
 		{
-			$SPChiTiet = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
-			$RowSPChiTiet = mysqli_fetch_array($SPChiTiet);
+			$SPChiTiet = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma, NSX_Ten FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma JOIN nhasanxuat d ON a.NSX_Ma = d.NSX_Ma WHERE SP_Ma = '$IDSP'");
+			$RowSPChiTiet = pg_fetch_array($SPChiTiet);
 			// $TenSP = $RowSPChiTiet['SP_Ten'];
 			// $GiaSP = $RowSPChiTiet['SP_GiaHienTai'];
 			// $SoLuongSP = $RowSPChiTiet['SP_SoLuong'];
@@ -181,8 +181,8 @@ if(isset($_GET['YeuThich']) && isset($_GET['IDSP']))
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<!-- product -->
 									<?php 
-									$SanPham = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE SP_SoLuong>0");
-									while($RowSanPham = mysqli_fetch_array($SanPham))
+									$SanPham = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten, c.LSP_Ma FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE SP_SoLuong>0");
+									while($RowSanPham = pg_fetch_array($SanPham))
 									{
 										?>
 										<div class="product <?php if($RowSanPham['LSP_Ma'] == 1){ echo "Laptop"; } else if($RowSanPham['LSP_Ma'] == 2){ echo "Mayanh"; } else echo "Dienthoai"; ?>">
@@ -305,8 +305,8 @@ if(isset($_GET['YeuThich']) && isset($_GET['IDSP']))
 								<div class="products-slick" data-nav="#slick-nav-2">
 									<!-- product -->
 									<?php 
-									$SPBanChay = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma ORDER BY SoLuong DESC LIMIT 0,4");
-									while($RowSPBanChay = mysqli_fetch_array($SPBanChay))
+									$SPBanChay = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma ORDER BY SoLuong DESC LIMIT 0,4");
+									while($RowSPBanChay = pg_fetch_array($SPBanChay))
 									{
 										?>
 										<div class="product">
@@ -371,8 +371,8 @@ if(isset($_GET['YeuThich']) && isset($_GET['IDSP']))
 						<div>
 							<!-- product widget -->
 							<?php 
-							$TopLapTop = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 1 ORDER BY SoLuong DESC LIMIT 0,3");
-							while($RowTopLT = mysqli_fetch_array($TopLapTop))
+							$TopLapTop = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 1 ORDER BY SoLuong DESC LIMIT 0,3");
+							while($RowTopLT = pg_fetch_array($TopLapTop))
 							{
 								?>
 								<div class="product-widget">
@@ -404,8 +404,8 @@ if(isset($_GET['YeuThich']) && isset($_GET['IDSP']))
 						<div>
 							<!-- product widget -->
 							<?php 
-							$TopCamera = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 2 ORDER BY SoLuong DESC LIMIT 0,3");
-							while($RowTopCamera = mysqli_fetch_array($TopCamera))
+							$TopCamera = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 2 ORDER BY SoLuong DESC LIMIT 0,3");
+							while($RowTopCamera = pg_fetch_array($TopCamera))
 							{
 								?>
 								<div class="product-widget">
@@ -440,8 +440,8 @@ if(isset($_GET['YeuThich']) && isset($_GET['IDSP']))
 						<div>
 							<!-- product widget -->
 							<?php 
-							$TopPhone = mysqli_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 3 ORDER BY SoLuong DESC LIMIT 0,3");
-							while($RowTopPhone = mysqli_fetch_array($TopPhone))
+							$TopPhone = pg_query($Connect,"SELECT a.*,(SELECT b.HSP_TenTapTin FROM hinhsanpham b WHERE a.SP_Ma = b.SP_Ma ORDER BY HSP_TenTapTin LIMIT 0,1) AS AvatarSP, LSP_Ten,(SELECT SUM(SP_DH_SoLuong) FROM sp_dondathang d WHERE a.SP_Ma = d.SP_Ma) AS SoLuong FROM sanpham a JOIN loaisanpham c ON a.LSP_Ma = c.LSP_Ma WHERE a.LSP_Ma = 3 ORDER BY SoLuong DESC LIMIT 0,3");
+							while($RowTopPhone = pg_fetch_array($TopPhone))
 							{
 								?>
 								<div class="product-widget">

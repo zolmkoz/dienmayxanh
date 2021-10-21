@@ -77,8 +77,8 @@ function HTTT($Connect)
 {
 	echo "<select name='slHTTT' class='form-control'>";
 	echo "<option value='0'>Chọn Hình Thức Thanh Toán</option>";
-	$HTTT = mysqli_query($Connect,"SELECT * FROM hinhthucthanhtoan");
-	while($RowHTTT = mysqli_fetch_array($HTTT))
+	$HTTT = pg_query($Connect,"SELECT * FROM hinhthucthanhtoan");
+	while($RowHTTT = pg_fetch_array($HTTT))
 	{
 		echo "<option value='".$RowHTTT['HTTT_Ma']."'>".$RowHTTT['HTTT_Ten']."</option>";
 	}
@@ -90,12 +90,12 @@ if(isset($_POST['btnGuiDonHang']))
 	{
 		$NoiGiao = $_POST['txtDiaChiNhan'];
 		$HTTT = $_POST['slHTTT'];
-		$NhapDonHang = mysqli_query($Connect,"INSERT INTO donhang (DH_NgayLap, DH_NoiGiao, DH_TrangThaiThanhToan, HTTT_Ma, KH_User) VALUES(now(),'".$NoiGiao."',0,'".$HTTT."','".$_SESSION['TaiKhoan']."')");
+		$NhapDonHang = pg_query($Connect,"INSERT INTO donhang (DH_NgayLap, DH_NoiGiao, DH_TrangThaiThanhToan, HTTT_Ma, KH_User) VALUES(now(),'".$NoiGiao."',0,'".$HTTT."','".$_SESSION['TaiKhoan']."')");
 		$DH_Ma = mysqli_insert_id($Connect);
 		foreach ($_SESSION['GioHang'] as $key => $item)
 		{
-			$SP_DatHang = mysqli_query($Connect,"INSERT INTO sp_dondathang(SP_Ma, DH_Ma, SP_DH_SoLuong, SP_DH_DonGia) VALUES('".$key."', '".$DH_Ma."', '".$item['SoLuong']."', '".$item['Gia']."')");
-			$UpdateSoLuong = mysqli_query($Connect,"UPDATE sanpham SET SP_SoLuong = SP_SoLuong-'".$item['SoLuong']."' WHERE SP_Ma='".$key."'");
+			$SP_DatHang = pg_query($Connect,"INSERT INTO sp_dondathang(SP_Ma, DH_Ma, SP_DH_SoLuong, SP_DH_DonGia) VALUES('".$key."', '".$DH_Ma."', '".$item['SoLuong']."', '".$item['Gia']."')");
+			$UpdateSoLuong = pg_query($Connect,"UPDATE sanpham SET SP_SoLuong = SP_SoLuong-'".$item['SoLuong']."' WHERE SP_Ma='".$key."'");
 		}
 		unset($_SESSION['GioHang']);
 		echo "<script language='javascript'>
